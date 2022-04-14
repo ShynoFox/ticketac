@@ -8,6 +8,24 @@ var userModel=require('../models/users');
 var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
 var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
+const fullDateFormat = function(date){
+  var newDate = new Date(date);
+  var format = newDate.getDate()+'/'+(newDate.getMonth()+1)+'/'+newDate.getFullYear();
+  return format;
+}
+
+const formattedDepartureTime= function(time){
+  var formattedDepartureTime='';
+  if(parseInt(time.substring(0,2))>12)
+        {
+          formattedDepartureTime= time + ' pm'
+        }
+        else
+        {
+          formattedDepartureTime= time+ ' am'
+        }
+  return formattedDepartureTime
+}
 
 
 /* GET home page. */
@@ -85,4 +103,34 @@ router.post('/search',async function(req,res,next){
 router.get("/no-train",async function(req,res,next){
   res.render("no-train");
 })
+
+router.get('/shop', async function(req, res, next) {
+  if(!req.session.ticketList)
+  {
+      req.session.ticketList=[]
+  }
+ 
+    if(req.query.id)
+    {
+      if(!req.session.ticketList.find(element=> element.id===req.query.id))
+      {
+          var journey=await journeyModel.findById(req.query.id)
+         
+          req.session.ticketList.push({
+              id: req.query.id,
+              journey: `${journey.departure}/${journey.arrival}`,
+              date: fullDateFormat(journey.date),
+              departureTime: formattedDepartureTime(journey.departureTime),
+              price: journey.price
+            })
+      } 
+   } 
+ 
+   console.log(req.session.ticketList)
+res.render('shop', {ticketList:req.session.ticketList});
+});
+
+
+
+
 module.exports = router;
