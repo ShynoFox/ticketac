@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var models = require('./routes/index')
 
+<<<<<<< HEAD
 var session = require("express-session")
 
 var app = express();
@@ -21,6 +22,17 @@ app.use(
     saveUninitialized: false,
    }) 
 );
+=======
+var session=require('express-session');
+var app = express();
+app.use(
+  session({
+  secret:'a4f8071f-c873-4447-8ee2',
+  resave:false,
+  saveUninitialized:false,
+  })
+  );
+>>>>>>> b06823e2fdfcd76996910e3d145edfd7c2d796cd
 
 app.locals.formatDate=function(date){
   var newDate = new Date(date);

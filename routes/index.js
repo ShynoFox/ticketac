@@ -85,4 +85,34 @@ router.get("/train",async function(req,res,next){
   var train=req.session.result;
   res.render("train",{train,date:req.session.date});
 })
+
+router.get('/shop', async function(req, res, next) {
+  if(!req.session.ticketList)
+  {
+      req.session.ticketList=[]
+  }
+ 
+    if(req.query.id)
+    {
+      if(!req.session.ticketList.find(element=> element.id===req.query.id))
+      {
+          var journey=await journeyModel.findById(req.query.id)
+         
+          req.session.ticketList.push({
+              id: req.query.id,
+              journey: `${journey.departure}/${journey.arrival}`,
+              date: fullDateFormat(journey.date),
+              departureTime: formattedDepartureTime(journey.departureTime),
+              price: journey.price
+            })
+      } 
+   } 
+ 
+   console.log(req.session.ticketList)
+res.render('shop', {ticketList:req.session.ticketList});
+});
+
+
+
+
 module.exports = router;
