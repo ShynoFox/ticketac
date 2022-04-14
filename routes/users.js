@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/sign-up', async function(req,res,next){
-
   var searchUser = await userModel.findOne({
     email: req.body.emailFromFront
   })
@@ -30,7 +29,7 @@ router.post('/sign-up', async function(req,res,next){
       email : newUserSave.email,
       id: newUserSave._id,
     }
-  
+    console.log(req.session.user)
     res.redirect('/homepage')
   } else {
     res.redirect('/')
@@ -50,6 +49,7 @@ router.post('/sign-in', async function(req,res,next){
       email: searchUser.email,
       id: searchUser._id
     }
+    console.log(req.session.user)
     res.redirect('/homepage')
   } else {
     res.render('login')
