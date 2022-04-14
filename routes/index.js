@@ -1,36 +1,9 @@
 var express = require('express');
 var router = express.Router();
-
 const mongoose = require('mongoose');
 
-// useNewUrlParser ;)
-var options = {
-  connectTimeoutMS: 5000,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
- };
-
-// --------------------- BDD -----------------------------------------------------
-mongoose.connect('mongodb+srv://Shyno:8G3uv59e!@cluster0.pmjtc.mongodb.net/ticketac?retryWrites=true',
-   options,
-   function(err) {
-    if (err) {
-      console.log(`error, failed to connect to the database because --> ${err}`);
-    } else {
-      console.info('*** Database Ticketac connection : Success ***');
-    }
-   }
-);
-
-var journeySchema = mongoose.Schema({
-  departure: String,
-  arrival: String,
-  date: Date,
-  departureTime: String,
-  price: Number,
-});
-
-var journeyModel = mongoose.model('journey', journeySchema);
+var journeyModel=require('../models/journeys');
+var userModel=require('../models/users');
 
 var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
 var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
@@ -39,7 +12,7 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('login', { title: 'Express' });
 });
 
 
@@ -95,5 +68,21 @@ router.get('/result', function(req, res, next) {
 
   res.render('index', { title: 'Express' });
 });
-
+//PAGE HOMEPAGE
+router.get('/homepage',async function(req,res,next){
+  var journeys=await journeyModel.find();
+  res.render('homepage');
+});
+//RECHERCHE DE BILLET
+router.post('/search',async function(req,res,next){
+  var search=await journeyModel.find({departure:req.body.departure,arrival:req.body.arrival,date:req.body.date});
+  if(search.length==0){
+    res.redirect('/no-train')
+  }
+  res.render('homepage',{search});
+});
+//SI PAS DE TRAIN
+router.get("/no-train",async function(req,res,next){
+  res.render("no-train");
+})
 module.exports = router;
