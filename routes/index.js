@@ -1,3 +1,4 @@
+const { useColors } = require('debug/src/browser');
 var express = require('express');
 const session = require('express-session');
 var router = express.Router();
@@ -5,6 +6,25 @@ const mongoose = require('mongoose');
 
 var journeyModel=require('../models/journeys');
 var userModel=require('../models/users');
+
+const fullDateFormat= function(date){
+    var newDate = new Date(date);
+    var format = newDate.getDate()+'/'+(newDate.getMonth()+1)+'/'+newDate.getFullYear();
+    return format;
+  }
+
+const formattedDepartureTime= function(time){
+  var formattedDepartureTime=''
+  if(parseInt(time.substring(0,2))>12)
+  {
+    formattedDepartureTime= time+' pm'
+  }
+  else 
+  {
+    formattedDepartureTime= time+' am'
+  }
+  return  formattedDepartureTime;
+} 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -66,7 +86,6 @@ router.get('/result', function(req, res, next) {
 });
 //PAGE HOMEPAGE
 router.get('/homepage',async function(req,res,next){
-  var journeys=await journeyModel.find();
   res.render('homepage');
 });
 //RECHERCHE DE BILLET
@@ -85,7 +104,7 @@ router.get("/train",async function(req,res,next){
   var train=req.session.result;
   res.render("train",{train,date:req.session.date});
 })
-
+//SI TRAIN
 router.get('/shop', async function(req, res, next) {
   if(!req.session.ticketList)
   {
@@ -108,11 +127,13 @@ router.get('/shop', async function(req, res, next) {
       } 
    } 
  
-   console.log(req.session.ticketList)
 res.render('shop', {ticketList:req.session.ticketList});
 });
 
-
+router.get('/my-last-trip',async function(req,res,next){
+console.log(user);
+  res.render('last-trip');
+})
 
 
 module.exports = router;

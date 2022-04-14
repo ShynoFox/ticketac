@@ -21,6 +21,7 @@ router.post('/sign-up', async function(req,res,next){
       firstname: req.body.firstNameFromFront,
       email: req.body.emailFromFront,
       password: req.body.passwordFromFront,
+      journeys:[]
     })
   
     var newUserSave = await newUser.save();
@@ -29,8 +30,6 @@ router.post('/sign-up', async function(req,res,next){
       email : newUserSave.email,
       id: newUserSave._id,
     }
-  
-    console.log(req.session.user)
   
     res.redirect('/homepage')
   } else {
