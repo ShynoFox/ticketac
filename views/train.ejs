@@ -8,7 +8,7 @@
   <body>
       <%if(train.length==0){%>
         <p>Oops: No train available</p>
-        <a href="/">Home</a>
+        <a href="/homepage">Home</a>
       <%}else{%>
         <h2>Tickets available on: <%=formatDate(date)%></h2>
         <%for(let i=0;i<train.length;i++){%>

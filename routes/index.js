@@ -84,9 +84,12 @@ router.get('/result', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 //PAGE HOMEPAGE
-router.get('/homepage',async function(req,res,next){
-  var journeys=await journeyModel.find();
-  res.render('homepage');
+router.get('/homepage',function(req,res,next){
+  if(req.session.user)
+  {
+    res.render('homepage');
+  }
+  else {res.redirect('/')}
 });
 //RECHERCHE DE BILLET
 router.post('/search',async function(req,res,next){
@@ -105,6 +108,8 @@ router.get("/train",async function(req,res,next){
   res.render("train",{train,date:req.session.date});
 })
 
+
+//PAGE PANIER
 router.get('/shop', async function(req, res, next) {
   if(!req.session.ticketList)
   {
