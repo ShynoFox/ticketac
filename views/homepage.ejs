@@ -6,17 +6,6 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-      <%if(search){%>
-        <%for(let i=0;i<search.length;i++){%>
-        <ul class="list-group">
-            <li class="list-group-item"><%=search[i].departure%></li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
-            <li class="list-group-item">A fourth item</li>
-            <li class="list-group-item">And a fifth one</li>
-          </ul>
-        <%}%>
-    <%}%>
     <h2>One-way ticket</h2>
     <form action="/search" method="post">
         <input type="text" name="departure" placeholder="From: Paris,Marseille...">
