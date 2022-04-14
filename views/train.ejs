@@ -16,7 +16,7 @@
           <li class="list-group-item"><%=train[i].departure%>/<%=train[i].arrival%></li>
           <li class="list-group-item">train departure at: <%=train[i].departureTime%></li>
           <li class="list-group-item"><%=train[i].price%>€</li>
-          <a class="list-group-item" href="/panier?id=<%=train[i]._id%>">OK</a>
+          <a class="list-group-item" href="/shop?id=<%=train[i].id%>">OK</a>
         </ul>
         <%}%>
       <%}%>

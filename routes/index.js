@@ -6,6 +6,25 @@ const mongoose = require('mongoose');
 var journeyModel=require('../models/journeys');
 var userModel=require('../models/users');
 
+const fullDateFormat= function(date){
+    var newDate = new Date(date);
+    var format = newDate.getDate()+'/'+(newDate.getMonth()+1)+'/'+newDate.getFullYear();
+    return format;
+  }
+
+const formattedDepartureTime= function(time){
+  var formattedDepartureTime=''
+  if(parseInt(time.substring(0,2))>12)
+  {
+    formattedDepartureTime= time+' pm'
+  }
+  else 
+  {
+    formattedDepartureTime= time+' am'
+  }
+  return  formattedDepartureTime;
+} 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('login');
