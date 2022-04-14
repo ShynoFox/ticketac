@@ -1,14 +1,10 @@
 var express = require('express');
+const session = require('express-session');
 var router = express.Router();
 const mongoose = require('mongoose');
 
 var journeyModel=require('../models/journeys');
 var userModel=require('../models/users');
-
-var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
-var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
-
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -76,13 +72,17 @@ router.get('/homepage',async function(req,res,next){
 //RECHERCHE DE BILLET
 router.post('/search',async function(req,res,next){
   var search=await journeyModel.find({departure:req.body.departure,arrival:req.body.arrival,date:req.body.date});
-  if(search.length==0){
-    res.redirect('/no-train')
+  req.session.date=req.body.date;
+  req.session.result=[];
+  for(let i=0;i<search.length;i++){
+    req.session.result.push({id:search[i]._id,departure:search[i].departure,
+    arrival:search[i].arrival,date:search[i].date,departureTime:search[i].departureTime,price:search[i].price});
   }
-  res.render('homepage',{search});
+  res.redirect('train');
 });
 //SI PAS DE TRAIN
-router.get("/no-train",async function(req,res,next){
-  res.render("no-train");
+router.get("/train",async function(req,res,next){
+  var train=req.session.result;
+  res.render("train",{train,date:req.session.date});
 })
 module.exports = router;
