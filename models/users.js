@@ -5,7 +5,7 @@ var userSchema = mongoose.Schema({
     firstname:String,
     email: String,
     password: String,
-    journeys: { type: mongoose.Schema.Types.ObjectId, ref:'journeys' }
+    journeys: [journeySchema]
 })
 
 var userModel = mongoose.model('users', userSchema)

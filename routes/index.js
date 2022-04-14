@@ -85,8 +85,17 @@ router.get('/result', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 //PAGE HOMEPAGE
+<<<<<<< HEAD
 router.get('/homepage',async function(req,res,next){
   res.render('homepage');
+=======
+router.get('/homepage',function(req,res,next){
+  if(req.session.user)
+  {
+    res.render('homepage');
+  }
+  else {res.redirect('/')}
+>>>>>>> 629373fcdd6f230370a8257822050910cb866e8d
 });
 //RECHERCHE DE BILLET
 router.post('/search',async function(req,res,next){
@@ -104,7 +113,13 @@ router.get("/train",async function(req,res,next){
   var train=req.session.result;
   res.render("train",{train,date:req.session.date});
 })
+<<<<<<< HEAD
 //SI TRAIN
+=======
+
+
+//PAGE PANIER
+>>>>>>> 629373fcdd6f230370a8257822050910cb866e8d
 router.get('/shop', async function(req, res, next) {
   if(!req.session.ticketList)
   {
