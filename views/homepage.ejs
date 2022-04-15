@@ -7,17 +7,31 @@
   </head>
   <body>
 
-    <div class="container">
+    <div class="container-fluid px-0 full-height">
       <!-- NAVBAR -->
-
-        <h4>One-way ticket :</h4>
-        <form action="/search" method="post">
+      <%- include('navbar')%>
+     <!-- SEARCH --> 
+      <div class="row justify-content-center mt-5">  
+        <div class="col-6 offset-1 m-3">
+          <h4>One-way ticket :</h4>
+        </div>
+      </div>
+      <div class="row justify-content-center mb-5">
+          <div class="col-5">
+          <form action="/search" method="post" class="d-flex justify-content-around">
             <input type="text" name="departure" placeholder="From: Paris,Marseille...">
             <input type="text" name="arrival" placeholder="To: Lille,Nantes...">
             <input type="date" name="date">
-            <button type="submit">Go</button>
-        </form>
-        <img src="../images/landmark.png"> 
+            <button type="submit" class="btn btn-danger">Go</button>
+          </form>
+        </div>
+      </div>
+      <div class="row  mb-5 justify-content-center">
+        <div class="col-6 d-flex justify-content-center">
+            <img src="../images/landmark.png" height="250px" width="250px"> 
+        </div>
+      </div>
+        
   </div>
 
 

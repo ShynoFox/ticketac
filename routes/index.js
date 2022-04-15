@@ -15,19 +15,16 @@ const fullDateFormat= function(date){
 
 const formattedDepartureTime= function(time){
   var formattedDepartureTime=''
-  if(parseInt(time.substring(0,2))>12)
-  {
-    formattedDepartureTime= time+' pm'
-  }
+  if(parseInt(time.substring(0,2))>12) 
+    { formattedDepartureTime= time+' pm'}
   else 
-  {
-    formattedDepartureTime= time+' am'
-  }
+    {formattedDepartureTime= time+' am'}
   return  formattedDepartureTime;
 } 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
   res.render('login');
 });
 
@@ -59,7 +56,7 @@ router.get('/save', async function(req, res, next) {
     }
 
   }
-  res.render('index', { title: 'Express' });
+  res.render('login');
 });
 
 
@@ -81,8 +78,7 @@ router.get('/result', function(req, res, next) {
 
   }
 
-
-  res.render('index', { title: 'Express' });
+  res.render('login');
 });
 //PAGE HOMEPAGE
 router.get('/homepage',function(req,res,next){
