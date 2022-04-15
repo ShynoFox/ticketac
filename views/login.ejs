@@ -19,57 +19,27 @@
     <div class="container>
 
         <!-- NAVBAR -->
-        <div class="row">
-         <div class="col-12 text-center">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar" href="/">
-                        <img src="/images/train.png" width="20" height="20" class="logo" alt="">
-                        </a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarText">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Ticketac</a>
-                      </li>
-                    </ul>
+        <%- include('navbar') %>
 
-                    <ul class="navbar-nav d-flex">
-                        <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="#">Connection</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">My last trips</a>
-                          </li>
-                      </ul>
-                  </div>
-                </div>
-              </nav>
-         </div>      
-        </div>
-
-        <div class="row">
+        <div class="row justify-content-center mt-5">
 
             <!-- SIGN IN AREA -->
-            <div class="col-12 col-sm-6 text-center">
-
+            <div class="col-4 col-sm-2 text-center">
                 <div class="formArea">
 
-                    <h4 class="titleForm">Sign-in :</h4>
+                    <h4>Sign-in :</h4>
 
                     <form action="/users/sign-in" method="POST">
-                        <div class="form-group">
+                        <div class="input-group mb-3">
                             <input name="emailFromFront" type="email" class="form-control" aria-describedby="emailHelp"
                                 placeholder="Email">
                         </div>
-                        <div class="form-group">
+                        <div class="input-group mb-3">
                             <input name="passwordFromFront" type="password" class="form-control"
                                 placeholder="Password">
                         </div>
 
-                        <button type="submit" class="btn btn-info">Confirm</button>
+                        <button type="submit" class="btn btn-danger">Confirm</button>
                     </form>
 
                 </div>
@@ -77,30 +47,30 @@
             </div>
 
             <!-- SIGN UP AREA -->
-            <div class="col-12 col-sm-6 text-center">
-
+            <div class="col-4 col-sm-2 text-center">
+                
                 <div class="formArea">
                     <h4 class="titleForm">Sign-up :</h4>
 
                     <form action="/users/sign-up" method="POST">
-                        <div class="form-group">
+                        <div class="input-group mb-3">
                             <input name="nameFromFront" type="text" class="form-control"
                                 placeholder="Name">
                         </div>
-                        <div class="form-group">
+                        <div class="input-group mb-3">
                             <input name="firstNameFromFront" type="text" class="form-control"
                                 placeholder="FirstName">
                         </div>
-                        <div class="form-group">
+                        <div class="input-group mb-3">
                             <input name="emailFromFront" type="email" class="form-control" aria-describedby="emailHelp"
                                 placeholder="Email">
                         </div>
-                        <div class="form-group">
+                        <div class="input-group mb-3">
                             <input name="passwordFromFront" type="password" class="form-control"
                                 placeholder="Password">
                         </div>
 
-                        <button type="submit" class="btn btn-info">Confirm</button>
+                        <button type="submit" class="btn btn-danger">Confirm</button>
                     </form>
                 </div>
 
