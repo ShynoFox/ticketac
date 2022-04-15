@@ -1,7 +1,26 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#d8efff+0,c7eff9+18,92d3fc+46,71c7f2+63,41aadb+96 */
+  background: linear-gradient(to bottom, #c9e5ed 0%,#bddded 18%,#89c5ed 46%,#64b0d6 70%,#3c87c9 100%);
 }
 
-a {
-  color: #00B7FF;
+h4
+{
+  color:white
+}
+
+/* login */
+.formArea
+{
+  padding-top: 60px;
+  padding-inline: 10px;
+  height:87vh
+}
+
+/* Navbar */
+
+
+#logout
+{
+  color: rgb(211, 1, 1)
 }

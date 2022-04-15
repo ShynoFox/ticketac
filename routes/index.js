@@ -102,13 +102,14 @@ router.post('/search',async function(req,res,next){
     req.session.result.push({id:search[i]._id,departure:search[i].departure,
     arrival:search[i].arrival,date:search[i].date,departureTime:search[i].departureTime,price:search[i].price});
   }
-  res.redirect('train');
+  // res.redirect('train');
+  res.render("train",{train:req.session.result,date:req.session.date});
 });
 //SI PAS DE TRAIN
-router.get("/train",async function(req,res,next){
-  var train=req.session.result;
-  res.render("train",{train,date:req.session.date});
-})
+// router.get("/train",async function(req,res,next){
+//   var train=req.session.result;
+//   res.render("train",{train,date:req.session.date});
+// })
 
 
 //PAGE PANIER
@@ -137,10 +138,34 @@ router.get('/shop', async function(req, res, next) {
 res.render('shop', {ticketList:req.session.ticketList});
 });
 
-router.get('/my-last-trip',async function(req,res,next){
-console.log(user);
-  res.render('last-trip');
-})
+//my last trip
+router.get('/lasttrips',async function(req,res,next){
+  if(req.session.user)
+  {
+    var user= await userModel.findById(req.session.user.id)
+    var journeyList=user.journeys
+    
+    console.log(journeyList)
+
+
+    // journeyList=journeyList.sort(function (a, b) {
+    //   return a.date - b.date;
+    // });
+    // journeyList=journeyList.sort(function (a, b) {
+    //   return a.departureTime - b.depatureTime;
+    // });
+
+
+    // journeyList=journeyList.sort({date:1, departureTime:1})
+    // ON CONSIDERE QU'ON EST LE 22/11/2018
+    // journeyList=journeyList.filter(elt=> new Date(elt) < new Date(22/11/2018))
+
+    console.log(journeyList)
+
+    res.render('last-trip', {journeyList});
+  }
+  else {res.redirect('/')}
+});
 
 
 module.exports = router;
