@@ -2,8 +2,7 @@ var mongoose = require('mongoose')
 
 var journeySchema= mongoose.Schema({
  date: String,
- departure:String,
- arrival:String,
+ journey:String,
  departureTime:String,
  price:Number
 })

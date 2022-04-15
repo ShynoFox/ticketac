@@ -130,13 +130,6 @@ router.get('/shop', async function(req, res, next) {
               departureTime: formattedDepartureTime(journey.departureTime),
               price: journey.price
             })
-          var user=await userModel.findOne({email:req.session.user.email});
-          for(let i=0;i<req.session.ticketList.length;i++){
-            user.journeys.push({date: req.session.ticketList[i].date,departure:req.session.ticketList[i].departure,
-            arrival:req.session.ticketList[i].arrival,departureTime:req.session.ticketList[i].departureTime,price:req.session.ticketList[i].price
-            });
-            await user.save();
-          }
       } 
    } 
  
