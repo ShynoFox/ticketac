@@ -1,12 +1,13 @@
 var mongoose = require('mongoose')
 
-var journeySchema = mongoose.Schema({
-    departure: String,
-    arrival: String,
-    date: Date,
-    departureTime: String,
-    price: Number,
-  });
+var journeySchema= mongoose.Schema({
+ date: String,
+ departure:String,
+ arrival:String,
+ departureTime:String,
+ price:Number
+})
+
 var userSchema = mongoose.Schema({
     name: String,
     firstname:String,

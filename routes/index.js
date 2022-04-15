@@ -31,7 +31,6 @@ router.get('/', function(req, res, next) {
   res.render('login');
 });
 
-
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
 
@@ -85,9 +84,16 @@ router.get('/result', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 //PAGE HOMEPAGE
-router.get('/homepage',async function(req,res,next){
+  router.get('/homepage',function(req,res,next){
+    if(req.session.user)
+    {
+      console.log(req.session.user)
+      res.render('homepage');
+    }
+    else {res.redirect('/')}
   res.render('homepage');
 });
+
 //RECHERCHE DE BILLET
 router.post('/search',async function(req,res,next){
   var search=await journeyModel.find({departure:req.body.departure,arrival:req.body.arrival,date:req.body.date});
@@ -102,7 +108,6 @@ router.post('/search',async function(req,res,next){
 //SI PAS DE TRAIN
 router.get("/train",async function(req,res,next){
   var train=req.session.result;
-  //modif
   res.render("train",{train,date:req.session.date});
 })
 //SI TRAIN
@@ -125,6 +130,13 @@ router.get('/shop', async function(req, res, next) {
               departureTime: formattedDepartureTime(journey.departureTime),
               price: journey.price
             })
+          var user=await userModel.findOne({email:req.session.user.email});
+          for(let i=0;i<req.session.ticketList.length;i++){
+            user.journeys.push({date: req.session.ticketList[i].date,departure:req.session.ticketList[i].departure,
+            arrival:req.session.ticketList[i].arrival,departureTime:req.session.ticketList[i].departureTime,price:req.session.ticketList[i].price
+            });
+            await user.save();
+          }
       } 
    } 
  
@@ -132,8 +144,7 @@ res.render('shop', {ticketList:req.session.ticketList});
 });
 
 router.get('/my-last-trip',async function(req,res,next){
-
-console.log(user);
+  
   res.render('last-trip');
 })
 
