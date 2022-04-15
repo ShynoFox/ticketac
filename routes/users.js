@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-// var request = require('sync-request');
 
 var userModel = require('../models/users')
 
@@ -52,7 +51,7 @@ router.post('/sign-in', async function(req,res,next){
     console.log(req.session.user)
     res.redirect('/homepage')
   } else {
-    res.render('login')
+    res.render('login',{user:req.session.user})
   }
 
   

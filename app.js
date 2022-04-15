@@ -22,11 +22,21 @@ app.use(
    }) 
 );
 
-app.locals.formatDate=function(date){
+app.locals.fullDateFormat=function(date){
   var newDate = new Date(date);
   var format = newDate.getDate()+'/'+(newDate.getMonth()+1);
   return format;
-}
+};
+
+app.locals.formattedDepartureTime= function(time){
+  var formattedDepartureTime=''
+  if(parseInt(time.substring(0,2))>12) 
+    { formattedDepartureTime= time+' pm'}
+  else 
+    {formattedDepartureTime= time+' am'}
+  return  formattedDepartureTime;
+} ;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
